@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'SyncLayer - Collaborative Task Management',
   description: 'Real-time collaborative task board for teams',
+  icons: {
+    icon: '/SyncLayer.svg',
+  },
 };
 
 export default function RootLayout({
