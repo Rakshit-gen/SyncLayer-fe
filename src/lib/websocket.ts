@@ -4,7 +4,7 @@ import { WSEvent, WSEventType } from '@/types/websocket';
 
 type EventHandler = (event: WSEvent) => void;
 
-const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8080';
+const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'wss://localhost:8080';
 
 class WebSocketClient {
   private ws: WebSocket | null = null;

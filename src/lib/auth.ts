@@ -51,26 +51,39 @@ export const authOptions: NextAuthOptions = {
 
       // Fetch user from backend to get ID
       // If user doesn't exist, try to create it
+      // Use timeout to prevent hanging if backend is unavailable
       if (token.email) {
         try {
-          const { user } = await api.getUserByEmail(token.email as string);
-          (session as any).userId = user.id;
-        } catch (error: any) {
-          // If user not found, try to create it
-          if (error?.message?.includes('not found') || error?.message?.includes('404')) {
-            try {
-              const { user: newUser } = await api.createUser({
-                email: token.email as string,
-                name: token.name as string,
-                avatar_url: token.picture as string,
-              });
-              (session as any).userId = newUser.id;
-            } catch (createError) {
-              console.error('Failed to create user in session callback:', createError);
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+          
+          try {
+            const { user } = await api.getUserByEmail(token.email as string);
+            (session as any).userId = user.id;
+          } catch (error: any) {
+            // If user not found, try to create it
+            if (error?.message?.includes('not found') || error?.message?.includes('404')) {
+              try {
+                const { user: newUser } = await api.createUser({
+                  email: token.email as string,
+                  name: token.name as string,
+                  avatar_url: token.picture as string,
+                });
+                (session as any).userId = newUser.id;
+              } catch (createError) {
+                console.error('Failed to create user in session callback:', createError);
+                // Don't block session if backend is unavailable
+              }
+            } else {
+              console.error('Failed to fetch user from backend:', error);
+              // Don't block session if backend is unavailable
             }
-          } else {
-            console.error('Failed to fetch user from backend:', error);
+          } finally {
+            clearTimeout(timeoutId);
           }
+        } catch (error) {
+          // If backend is completely unavailable, still return session
+          console.warn('Backend unavailable during session check, continuing without userId:', error);
         }
       }
 
@@ -86,6 +99,10 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   secret: process.env.NEXTAUTH_SECRET,
+  // Explicitly set the base URL for callbacks
+  ...(process.env.NEXTAUTH_URL && {
+    url: process.env.NEXTAUTH_URL,
+  }),
 };
 
 // Extend session type

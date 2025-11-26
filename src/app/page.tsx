@@ -3,9 +3,9 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
-  Kanban,
   Users,
   Zap,
   Shield,
@@ -20,6 +20,7 @@ import {
   Globe,
   Star,
   ChevronDown,
+  LayoutDashboard,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -73,9 +74,17 @@ export default function Home() {
         <nav className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Kanban className="h-8 w-8 text-primary animate-pulse" />
+              <div className="h-8 w-8 rounded bg-black flex items-center justify-center p-1.5">
+                <Image
+                  src="/SyncLayer.svg"
+                  alt="SyncLayer"
+                  width={24}
+                  height={24}
+                  className="object-contain animate-pulse"
+                />
+              </div>
               <span className="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                TaskBoard
+                SyncLayer
               </span>
             </div>
             <div className="flex items-center gap-4">
@@ -110,7 +119,7 @@ export default function Home() {
             </span>
           </h1>
           <p className="text-xl md:text-2xl leading-8 text-muted-foreground mb-10 max-w-2xl mx-auto animate-fade-in-up animation-delay-200">
-            TaskBoard is a modern, real-time collaborative task management
+            SyncLayer is a modern, real-time collaborative task management
             platform. Organize your team&apos;s work with intuitive kanban boards,
             track progress, and stay in sync.
           </p>
@@ -248,7 +257,7 @@ export default function Home() {
               title: 'Create Boards',
               description:
                 'Organize your projects with customizable kanban boards.',
-              icon: Kanban,
+              icon: LayoutDashboard,
             },
             {
               step: '3',
@@ -314,7 +323,7 @@ export default function Home() {
             Loved by teams worldwide
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            See what our users have to say about TaskBoard
+            See what our users have to say about SyncLayer
           </p>
         </div>
 
@@ -325,7 +334,7 @@ export default function Home() {
               role: 'Product Manager',
               company: 'TechCorp',
               content:
-                'TaskBoard has transformed how our team collaborates. The real-time updates keep everyone in sync.',
+                'SyncLayer has transformed how our team collaborates. The real-time updates keep everyone in sync.',
               rating: 5,
             },
             {
@@ -375,45 +384,59 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="container mx-auto px-4 py-20 md:py-32">
-        <div className="max-w-3xl mx-auto text-center p-12 rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-primary/10 border border-primary/20">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Ready to get started?
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Join thousands of teams already using TaskBoard to manage their
-            projects
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <section className="container mx-auto px-4 py-24 md:py-32">
+        <div className="max-w-2xl mx-auto text-center space-y-8">
+          <div className="space-y-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
+              Start collaborating today
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-xl mx-auto">
+              Join teams worldwide who trust SyncLayer for their project management
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Link href="/login">
-              <Button size="lg" className="group">
+              <Button size="lg" className="group min-w-[200px]">
                 Get Started Free
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Button variant="outline" size="lg">
-              Contact Sales
+            <Button variant="outline" size="lg" className="min-w-[200px]">
+              Schedule Demo
             </Button>
           </div>
+          <p className="text-sm text-muted-foreground pt-4">
+            No credit card required • Free forever • Setup in minutes
+          </p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t bg-muted/30">
-        <div className="container mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div>
+      <footer className="border-t">
+        <div className="container mx-auto px-4 py-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-12">
+            <div className="col-span-2 md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                <Kanban className="h-6 w-6 text-primary" />
-                <span className="text-lg font-bold">TaskBoard</span>
+                <div className="h-6 w-6 rounded bg-black flex items-center justify-center p-1">
+                  <Image
+                    src="/SyncLayer.svg"
+                    alt="SyncLayer"
+                    width={20}
+                    height={20}
+                    className="object-contain"
+                  />
+                </div>
+                <span className="text-lg font-bold">SyncLayer</span>
               </div>
-              <p className="text-sm text-muted-foreground">
-                The modern way to manage tasks and collaborate with your team.
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Modern task management for teams that move fast.
               </p>
             </div>
             <div>
-              <h4 className="font-semibold mb-4 text-foreground">Product</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <h4 className="font-medium mb-4 text-foreground text-sm uppercase tracking-wider">
+                Product
+              </h4>
+              <ul className="space-y-3 text-sm text-muted-foreground">
                 <li>
                   <Link href="#" className="hover:text-foreground transition-colors">
                     Features
@@ -432,8 +455,10 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4 text-foreground">Company</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <h4 className="font-medium mb-4 text-foreground text-sm uppercase tracking-wider">
+                Company
+              </h4>
+              <ul className="space-y-3 text-sm text-muted-foreground">
                 <li>
                   <Link href="#" className="hover:text-foreground transition-colors">
                     About
@@ -452,16 +477,18 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4 text-foreground">Support</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <h4 className="font-medium mb-4 text-foreground text-sm uppercase tracking-wider">
+                Resources
+              </h4>
+              <ul className="space-y-3 text-sm text-muted-foreground">
                 <li>
                   <Link href="#" className="hover:text-foreground transition-colors">
-                    Documentation
+                    Docs
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="hover:text-foreground transition-colors">
-                    Help Center
+                    Support
                   </Link>
                 </li>
                 <li>
@@ -472,17 +499,16 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <div className="pt-8 border-t flex flex-col md:flex-row items-center justify-between text-sm text-muted-foreground">
-            <p>© 2024 TaskBoard. All rights reserved.</p>
-            <div className="flex gap-6 mt-4 md:mt-0">
+          <div className="pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-muted-foreground">
+              © 2024 SyncLayer. All rights reserved.
+            </p>
+            <div className="flex gap-6 text-sm text-muted-foreground">
               <Link href="#" className="hover:text-foreground transition-colors">
                 Privacy
               </Link>
               <Link href="#" className="hover:text-foreground transition-colors">
                 Terms
-              </Link>
-              <Link href="#" className="hover:text-foreground transition-colors">
-                Cookies
               </Link>
             </div>
           </div>

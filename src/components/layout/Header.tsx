@@ -1,8 +1,9 @@
 'use client';
 
 import { signOut, useSession } from 'next-auth/react';
-import { Kanban, Bell, LogOut, Settings, User } from 'lucide-react';
+import { Bell, LogOut, Settings, User } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -22,8 +23,16 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-card">
       <div className="flex h-16 items-center justify-between px-6">
         <Link href="/teams" className="flex items-center gap-2">
-          <Kanban className="h-6 w-6 text-primary" />
-          <span className="text-lg font-bold">TaskBoard</span>
+          <div className="h-6 w-6 rounded bg-black flex items-center justify-center p-1">
+            <Image
+              src="/SyncLayer.svg"
+              alt="SyncLayer"
+              width={20}
+              height={20}
+              className="object-contain"
+            />
+          </div>
+          <span className="text-lg font-bold">SyncLayer</span>
         </Link>
 
         <div className="flex items-center gap-4">

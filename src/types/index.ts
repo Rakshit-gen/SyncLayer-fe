@@ -1,4 +1,4 @@
-// Types for the TaskBoard application
+// Types for the SyncLayer application
 
 export type TeamRole = 'admin' | 'editor' | 'viewer';
 export type TaskPriority = 'low' | 'medium' | 'high' | 'urgent';

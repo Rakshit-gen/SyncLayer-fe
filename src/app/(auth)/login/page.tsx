@@ -3,9 +3,9 @@
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Kanban } from 'lucide-react';
 
 export default function LoginPage() {
   const { status } = useSession();
@@ -30,11 +30,17 @@ export default function LoginPage() {
       <Card className="w-full max-w-md mx-4">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="p-3 bg-primary/10 rounded-full">
-              <Kanban className="h-8 w-8 text-primary" />
+            <div className="p-3 bg-black rounded-full">
+              <Image
+                src="/SyncLayer.svg"
+                alt="SyncLayer"
+                width={32}
+                height={32}
+                className="object-contain"
+              />
             </div>
           </div>
-          <CardTitle className="text-2xl">Welcome to TaskBoard</CardTitle>
+          <CardTitle className="text-2xl">Welcome to SyncLayer</CardTitle>
           <CardDescription>
             Sign in to start collaborating with your team
           </CardDescription>
