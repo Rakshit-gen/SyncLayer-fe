@@ -46,7 +46,7 @@ class AIService {
     }
 
     const requestBody: GroqRequest = {
-      model: 'llama-3.1-70b-versatile',
+      model: 'llama-3.3-70b-versatile',
       messages,
       stream: false,
     };
