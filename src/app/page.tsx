@@ -130,9 +130,6 @@ export default function Home() {
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Button variant="outline" size="lg">
-              Watch Demo
-            </Button>
           </div>
           <div className="flex items-center justify-center gap-8 text-sm text-muted-foreground animate-fade-in animation-delay-600">
             <div className="flex items-center gap-2">
@@ -401,9 +398,6 @@ export default function Home() {
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Button variant="outline" size="lg" className="min-w-[200px]">
-              Schedule Demo
-            </Button>
           </div>
           <p className="text-sm text-muted-foreground pt-4">
             No credit card required • Free forever • Setup in minutes
@@ -413,103 +407,30 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t">
-        <div className="container mx-auto px-4 py-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-12">
-            <div className="col-span-2 md:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="h-6 w-6 rounded bg-black flex items-center justify-center p-1">
-                  <Image
-                    src="/SyncLayer.svg"
-                    alt="SyncLayer"
-                    width={20}
-                    height={20}
-                    className="object-contain"
-                  />
-                </div>
-                <span className="text-lg font-bold">SyncLayer</span>
+        <div className="container mx-auto px-4 py-12">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <div className="h-6 w-6 rounded bg-black flex items-center justify-center p-1">
+                <Image
+                  src="/SyncLayer.svg"
+                  alt="SyncLayer"
+                  width={20}
+                  height={20}
+                  className="object-contain"
+                />
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Modern task management for teams that move fast.
+              <span className="text-sm font-medium">SyncLayer</span>
+              <span className="text-sm text-muted-foreground">·</span>
+              <p className="text-sm text-muted-foreground">
+                Real-time collaboration for modern teams
               </p>
             </div>
-            <div>
-              <h4 className="font-medium mb-4 text-foreground text-sm uppercase tracking-wider">
-                Product
-              </h4>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Features
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Pricing
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Security
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-medium mb-4 text-foreground text-sm uppercase tracking-wider">
-                Company
-              </h4>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Careers
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-medium mb-4 text-foreground text-sm uppercase tracking-wider">
-                Resources
-              </h4>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Docs
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Support
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-muted-foreground">
-              © 2024 SyncLayer. All rights reserved.
-            </p>
-            <div className="flex gap-6 text-sm text-muted-foreground">
-              <Link href="#" className="hover:text-foreground transition-colors">
-                Privacy
+            <div className="flex items-center gap-6 text-sm text-muted-foreground">
+              <Link href="/login" className="hover:text-foreground transition-colors">
+                Sign In
               </Link>
-              <Link href="#" className="hover:text-foreground transition-colors">
-                Terms
-              </Link>
+              <span>·</span>
+              <p>© 2025 SyncLayer</p>
             </div>
           </div>
         </div>
