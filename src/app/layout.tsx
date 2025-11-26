@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'SyncLayer - Collaborative Task Management',
   description: 'Real-time collaborative task board for teams',
   icons: {
-    icon: '/SyncLayer.svg',
+    icon: '/SyncLayer2.svg',
   },
 };
 

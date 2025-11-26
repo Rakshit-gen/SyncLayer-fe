@@ -32,7 +32,7 @@ export default function LoginPage() {
           <div className="flex justify-center mb-4">
             <div className="p-3 bg-black rounded-full">
               <Image
-                src="/SyncLayer.svg"
+                src="/SyncLayer2.svg"
                 alt="SyncLayer"
                 width={32}
                 height={32}

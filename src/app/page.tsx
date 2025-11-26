@@ -76,7 +76,7 @@ export default function Home() {
             <div className="flex items-center gap-2">
               <div className="h-8 w-8 rounded bg-black flex items-center justify-center p-1.5">
                 <Image
-                  src="/SyncLayer.svg"
+                  src="/SyncLayer2.svg"
                   alt="SyncLayer"
                   width={24}
                   height={24}
@@ -412,7 +412,7 @@ export default function Home() {
             <div className="flex items-center gap-3">
               <div className="h-6 w-6 rounded bg-black flex items-center justify-center p-1">
                 <Image
-                  src="/SyncLayer.svg"
+                  src="/SyncLayer2.svg"
                   alt="SyncLayer"
                   width={20}
                   height={20}
