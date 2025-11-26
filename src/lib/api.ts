@@ -31,9 +31,29 @@ function getApiUrl(): string {
   // Server-side (Node.js/Docker): use API_URL (Docker service name)
   // Client-side (browser): use NEXT_PUBLIC_API_URL (host machine)
   if (typeof window === 'undefined') {
-    return process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+    const apiUrl = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
+    if (apiUrl) {
+      // Ensure http:// for localhost, not https://
+      return apiUrl.replace(/^https:\/\/localhost/, 'http://localhost');
+    }
+    return 'http://localhost:8080';
   }
-  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+  
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (apiUrl) {
+    // Ensure http:// for localhost, not https://
+    return apiUrl.replace(/^https:\/\/localhost/, 'http://localhost');
+  }
+  
+  // Default: use http:// for localhost
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      return 'http://localhost:8080';
+    }
+  }
+  
+  return 'http://localhost:8080';
 }
 
 class ApiClient {
@@ -67,12 +87,30 @@ class ApiClient {
       throw new Error(error.error.message);
     }
 
-    // Handle 204 No Content
+    // Handle 204 No Content (for DELETE operations)
     if (response.status === 204) {
       return {} as T;
     }
 
-    return response.json();
+    // Handle empty response body
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      // If no JSON content type, return empty object
+      return {} as T;
+    }
+
+    // Parse JSON response
+    const text = await response.text();
+    if (!text || text.trim() === '') {
+      return {} as T;
+    }
+
+    try {
+      return JSON.parse(text) as T;
+    } catch (parseError) {
+      console.error('Failed to parse JSON response:', parseError, 'Response:', text);
+      throw new Error('Invalid JSON response from server');
+    }
   }
 
   // User endpoints

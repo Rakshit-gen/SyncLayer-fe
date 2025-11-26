@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { MoreHorizontal, Plus, Trash2, Edit2 } from 'lucide-react';
+import { MoreHorizontal, Plus, Trash2, Edit2, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { ColumnWithTasks } from '@/types';
 import { TaskCard } from '@/components/tasks/TaskCard';
+import { AITaskGenerator } from './AITaskGenerator';
 import { useBoardStore } from '@/stores/useBoardStore';
 import { api } from '@/lib/api';
 
@@ -25,11 +26,12 @@ interface ColumnProps {
 }
 
 export function Column({ column, userId, boardId }: ColumnProps) {
-  const { addTask, removeColumn, updateColumn } = useBoardStore();
+  const { addTask, removeColumn, updateColumn, currentBoard } = useBoardStore();
   const [isAddingTask, setIsAddingTask] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(column.name);
+  const [isAIGeneratorOpen, setIsAIGeneratorOpen] = useState(false);
 
   const {
     attributes,
@@ -200,16 +202,34 @@ export function Column({ column, userId, boardId }: ColumnProps) {
             </div>
           </div>
         ) : (
-          <Button
-            variant="ghost"
-            className="w-full justify-start text-muted-foreground"
-            onClick={() => setIsAddingTask(true)}
-          >
-            <Plus className="mr-2 h-4 w-4" />
-            Add Task
-          </Button>
+          <div className="space-y-2">
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-muted-foreground"
+              onClick={() => setIsAddingTask(true)}
+            >
+              <Plus className="mr-2 h-4 w-4" />
+              Add Task
+            </Button>
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-muted-foreground"
+              onClick={() => setIsAIGeneratorOpen(true)}
+            >
+              <Sparkles className="mr-2 h-4 w-4" />
+              AI Generate Tasks
+            </Button>
+          </div>
         )}
       </div>
+
+      <AITaskGenerator
+        columnId={column.id}
+        userId={userId}
+        boardName={currentBoard?.name}
+        isOpen={isAIGeneratorOpen}
+        onClose={() => setIsAIGeneratorOpen(false)}
+      />
     </div>
   );
 }

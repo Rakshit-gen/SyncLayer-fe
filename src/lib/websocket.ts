@@ -4,7 +4,23 @@ import { WSEvent, WSEventType } from '@/types/websocket';
 
 type EventHandler = (event: WSEvent) => void;
 
-const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'wss://localhost:8080';
+// Helper function to get WebSocket URL based on environment
+const getWsUrl = (): string => {
+  const wsUrl = process.env.NEXT_PUBLIC_WS_URL;
+  if (wsUrl) {
+    return wsUrl;
+  }
+  // Default to ws:// for localhost, wss:// for production
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      return 'ws://localhost:8080';
+    }
+  }
+  return 'ws://localhost:8080'; // Default fallback
+};
+
+const WS_URL = getWsUrl();
 
 class WebSocketClient {
   private ws: WebSocket | null = null;

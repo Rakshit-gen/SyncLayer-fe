@@ -78,8 +78,8 @@ export default function Home() {
                 <Image
                   src="/SyncLayer2.svg"
                   alt="SyncLayer"
-                  width={24}
-                  height={24}
+                  width={30}
+                  height={30}
                   className="object-contain animate-pulse"
                 />
               </div>
@@ -414,8 +414,8 @@ export default function Home() {
                 <Image
                   src="/SyncLayer2.svg"
                   alt="SyncLayer"
-                  width={20}
-                  height={20}
+                  width={30}
+                  height={30}
                   className="object-contain"
                 />
               </div>

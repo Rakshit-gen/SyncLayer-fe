@@ -27,8 +27,8 @@ export function Header() {
             <Image
               src="/SyncLayer2.svg"
               alt="SyncLayer"
-              width={20}
-              height={20}
+              width={30}
+              height={30}
               className="object-contain"
             />
           </div>
